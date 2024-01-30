@@ -1,0 +1,352 @@
+{%extends 'base.html' %}
+{%block title%} Home {% endblock%}
+
+    {% block toggel%}
+    <div class="toggel">
+        <div class="home">
+            <a href="{% url 'home' %}">Home</a>
+        </div>
+        <div class="profile">
+            <a href="{% url 'profile' %}">Profile</a>
+        </div>
+    </div>
+    {% endblock %}
+
+{% block content%}
+<style>
+    .toggel {
+        width: 500px;
+        height: 60px;
+        flex-shrink: 0;
+        border-radius: 14px;
+        background: linear-gradient(91deg, #06C -0.23%, #BEDBF8 104.85%);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+
+        align-items: center;
+
+    }
+
+    .home{
+        width: 50%;
+height: 40px;
+flex-shrink: 0;
+border-radius: 8px;
+background: linear-gradient(267deg, #FFF4EA -8.35%, #F1F1F1 105.51%);
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+margin: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+    }
+    .home a{
+        width: 100%;
+height: 30px;
+flex-shrink: 0;
+color: #06C;
+text-align: center;
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+text-decoration: none;
+text-align: center;
+
+    }
+    .profile{
+        width: 50%;
+        height: 40px;
+        background: linear-gradient(267deg, #FFF4EA -8.35%, #F1F1F1 105.51%);
+        background: transparent;
+        border-radius: 8px;
+        margin: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .profile a{
+        color: #FFF4EA;
+text-align: center;
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+width: 100%px;
+height: 30px;
+flex-shrink: 0;
+text-decoration: none;
+    }
+    .mssg {
+        left: 30px;
+        line-height: 26px;
+        letter-spacing: 0em;
+        text-align: left;
+        position: relative;
+    }
+    .mssg p{
+        color: #455A64;
+font-family: Poppins;
+font-size: 17px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+    }
+    .mssg h1{
+        margin-top: -25px;
+color: #455A64;
+font-family: Poppins;
+font-size: 32px;
+font-style: italic;
+line-height: normal;
+    }
+    .vertical-line {
+        width: 450px;
+        height: 2px;
+        background-color: #696969;
+        align-items: center;
+        border-radius: 8px;
+        position: relative;
+        left: 30px;
+        top: -20px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .addtask{
+        width: 100%;
+height: 64px;
+display: flex;
+align-items: center;
+    }
+ 
+    input{
+        display: flex;
+width: 410px;
+height: 40px;
+flex-direction: row;
+justify-content: center;
+color: #777;
+font-family: Poppins;
+font-size: 15px;
+font-style: italic;
+font-weight: 400;
+line-height: normal;
+border: 1px solid;
+border-color: #696969;
+margin-left: 35px;
+padding-left: 15px;
+border-radius: 8px;
+transition: 0.1s ease;
+z-index: 111;
+outline: none;
+background: transparent;
+float: left;
+margin-top: -45px;
+    }
+    
+    input:focus,
+    input:valid {
+        color: #1F9B3B;
+        border: 2px solid #1F9B3B;
+    }
+    .add{
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        float: right;
+    }
+.add svg{
+    width: 45px;
+height: 45px;
+margin-top: -45px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+li {
+    width: 461px;
+    height: 45px;
+    flex-shrink: 0;
+    border-radius: 13px;
+    background: #F4F4F4;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+    margin: 15px;
+    transition: opacity 0.5s ease-in-out;
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+
+}
+.delete{
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+.delete svg{
+    width: 25px;
+height: 25px;
+}
+.bullet{
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+    margin: 11px;
+}
+.bullet svg{
+    width: 25px;
+    height: 25px;
+}
+
+.taskli{
+    width: 300px;
+height: 28px;
+color: #455A64;
+font-family: Poppins;
+font-size: 18px;
+font-style: italic;
+font-weight: 400;
+line-height: normal;
+padding: 8px;
+}
+
+.done{
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    margin-top: 11px;
+    margin-right: 8px;
+}
+
+.done svg{
+    width: 25px;
+    height: 25px;
+}
+.all_tasks{
+    color: #001E69;
+font-family: Poppins;
+font-size: 20px;
+font-style: italic;
+font-weight: 400;
+line-height: normal;
+float: right;
+margin-right: 25px;
+}
+.all_tasks a{
+    text-decoration: none;
+}
+.no-tasks-message {
+    color: #455A64;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    margin-top: 20px;
+}
+    
+</style>
+<div class="mssg">
+    <p>Hey!!</p>
+    <h1>{{ user.first_name }} {{user.last_name}}</h1>
+</div>
+
+<div class="addtask">
+    <form action="{% url 'add_task' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <input type="text" placeholder="What is next to do?" class="task" name = "task" required>
+          </div>
+        <button type="submit" class = "add"><svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+            <g filter="url(#filter0_d_1_18)">
+              <circle cx="28" cy="28" r="27" fill="#1F9B3B"/>
+            </g>
+            <path d="M28 15.2105L28 40.7895" stroke="#F4F4F4" stroke-width="3" stroke-linecap="round"/>
+            <path d="M40.7894 28L15.2105 28" stroke="#F4F4F4" stroke-width="3" stroke-linecap="round"/>
+            <defs>
+              <filter id="filter0_d_1_18" x="0.2" y="0.2" width="59.6" height="59.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dx="2" dy="2"/>
+                <feGaussianBlur stdDeviation="1.4"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0.00833333 0 0 0 0 0.00833333 0 0 0 0 0.00833333 0 0 0 0.22 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_18"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_18" result="shape"/>
+              </filter>
+            </defs>
+          </svg> </button>
+    </form>
+</div>
+
+
+<div class="vertical-line"></div>
+<ul>
+    {% if incomplete_tasks %}
+    <div class="all_tasks">
+        <a href="{% url 'all_tasks' %}">See all 
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="16" viewBox="0 0 45 16" fill="none">
+                <path d="M44.7071 8.70711C45.0976 8.31658 45.0976 7.68342 44.7071 7.29289L38.3431 0.928932C37.9526 0.538408 37.3195 0.538408 36.9289 0.928932C36.5384 1.31946 36.5384 1.95262 36.9289 2.34315L42.5858 8L36.9289 13.6569C36.5384 14.0474 36.5384 14.6805 36.9289 15.0711C37.3195 15.4616 37.9526 15.4616 38.3431 15.0711L44.7071 8.70711ZM0 9H44V7H0V9Z" fill="#001E69"/>
+              </svg>
+        </a>
+    
+    </div>
+    {% for task in incomplete_tasks|slice:":6" %}
+
+       <li>
+        <div class="bullet"><svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
+            <circle cx="21" cy="21" r="21" fill="#D9D9D9"/>
+            <circle cx="21" cy="21" r="15" fill="#F0F0F0"/>
+            <circle cx="21" cy="21" r="12" fill="#831111"/>
+          </svg></div>
+        <div class="taskli">
+            {{ task.text }}
+        </div>
+        <form action="{% url 'complete_task' task.id %}" method="post" style="display: inline;">
+
+
+            {% csrf_token %}
+            <button type="submit" class = "done"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <circle cx="14" cy="14" r="14" fill="#1F9B3B"/>
+                <path d="M8.16667 14.5L11.6667 18L21 9" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg></button>
+              <form action="{% url 'delete_task' task.id%}">
+                {% csrf_token %}
+            <button type="submit" class = "delete">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <circle cx="14" cy="14" r="14" fill="#FF2525"/>
+                    <path d="M18.6892 9.31075L9.31074 18.6892" stroke="#F4F4F4" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M18.6892 18.6892L9.31074 9.31075" stroke="#F4F4F4" stroke-width="3" stroke-linecap="round"/>
+                  </svg></button>
+                </form>
+        </form>
+
+       </li>
+       {% endfor %}
+       {% else %}
+       <p class="no-tasks-message">No tasks to display.</p>
+       {% endif %}
+</ul>
+
+
+<script>
+   
+</script>
+
+{% endblock %}

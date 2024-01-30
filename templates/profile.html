@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% block title %} {{user.username}} {% endblock %}
+
+{% block toggel%}
+<div class="toggel">
+    <div class="home">
+        <a href="{% url 'home' %}">Home</a>
+    </div>
+    <div class="profile">
+        <a href="{% url 'profile' %}">Profile</a>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+<style>
+    .toggel {
+        width: 500px;
+        height: 60px;
+        flex-shrink: 0;
+        border-radius: 14px;
+        background: linear-gradient(91deg, #06C -0.23%, #BEDBF8 104.85%);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+
+        align-items: center;
+
+    }
+
+    .home{
+        width: 50%;
+height: 40px;
+flex-shrink: 0;
+border-radius: 8px;
+background: linear-gradient(267deg, #FFF4EA -8.35%, #F1F1F1 105.51%);
+background: transparent;
+ margin: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+    }
+    .home a{
+        width: 100%;
+height: 30px;
+flex-shrink: 0;
+color: #FFF4EA;
+text-align: center;
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+text-decoration: none;
+text-align: center;
+
+    }
+    .profile{
+        width: 50%;
+        height: 40px;
+        background: linear-gradient(267deg, #FFF4EA -8.35%, #F1F1F1 105.51%);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+        border-radius: 8px;
+        margin: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .profile a{
+        color: #06C;
+text-align: center;
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+width: 100%px;
+height: 30px;
+flex-shrink: 0;
+text-decoration: none;
+    }
+    .mssg {
+        left: 30px;
+        line-height: 26px;
+        letter-spacing: 0em;
+        text-align: left;
+        position: relative;
+    }
+    .mssg p{
+        color: #455A64;
+font-family: Poppins;
+font-size: 17px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+    }
+    .mssg h1{
+        margin-top: -25px;
+color: #455A64;
+font-family: Poppins;
+font-size: 32px;
+font-style: italic;
+line-height: normal;
+    }
+    .vertical-line {
+        width: 450px;
+        height: 2px;
+        background-color: #696969;
+        align-items: center;
+        border-radius: 8px;
+        position: relative;
+        left: 30px;
+        top: 300;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    li {
+        width: 461px;
+        height: 45px;
+        flex-shrink: 0;
+        border-radius: 13px;
+        background: #F4F4F4;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+        margin: 15px;
+        margin-top: 0px;
+        transition: opacity 0.5s ease-in-out;
+        margin-left: 20px;
+        margin-right: 20px;
+        display: flex;
+        align-items: center;
+    
+    }
+.assign{
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    margin: 11px;
+    margin-top: 15px;
+    align-items: center;
+}
+.assign svg{
+    width: 30px;
+    height: 30px;
+    margin-left: 15px;
+}
+
+.taskli{
+    width: 300px;
+    height: 28px;
+    color: #455A64;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: -20px;
+
+}
+.colHead{
+    margin-left: 25px;
+    display: flex;
+    align-items: center;
+    color: #455A64;
+    font-family: Poppins;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.complet{
+margin-left: 25px;
+}
+
+.horizontal {
+    width: 36px;
+    height: 5px;
+    stroke-width: 25px;
+    background-color: #16A000;
+    border-radius: 5px;
+    position: relative; 
+    transform: translate(-50%, -50%) rotate(90deg);
+    margin-left: 15px;
+    margin-top: 8px;
+}
+
+
+</style>
+
+    {% if user.is_authenticated %}
+    <div class="mssg">
+        <p>Hey!!</p>
+        <h1>{{ user.first_name }} {{user.last_name}}</h1>
+    </div>
+    <div class="vertical-line"></div>
+    <div class="colHead">
+        <div class="reassign">
+            <p>Re-assign</p>
+        </div>
+        <div class="complet">
+            <p>Completed Tasks</p>
+        </div>
+    </div>
+    <ul>
+        {% for task in completed_tasks %}
+          <li>
+            <form method="post" action="{% url 'reassign_task' task.id %}">
+              {% csrf_token %}
+              <button type="submit" class="assign">
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="30" viewBox="0 0 34 30" fill="none">
+                    <path d="M33.7024 15.8593L28.5369 8.99673C28.2869 8.66445 27.7896 8.66058 27.5345 8.98854L22.1953 15.8516C21.873 16.2662 22.1682 16.8704 22.6935 16.8704H26.1438C25.2495 22.2147 20.5943 26.3015 15 26.3015C8.76832 26.3015 3.6985 21.2317 3.6985 15C3.6985 8.76832 8.76832 3.6985 15 3.6985C18.4067 3.6985 21.5989 5.21376 23.7575 7.85597C24.404 8.64722 25.5693 8.76357 26.3597 8.118C27.1505 7.47199 27.2677 6.30667 26.6217 5.51586C23.7575 2.01043 19.5216 0 15 0C6.72901 0 0 6.72901 0 15C0 23.271 6.72901 30 15 30C22.6375 30 28.9554 24.2613 29.8793 16.8704H33.1982C33.7188 16.8704 34.0153 16.2756 33.7024 15.8593Z" fill="#16A000"/>
+                  </svg>
+              </button>
+            </form>
+            <div class="horizontal">
+            </div>
+            <div class="taskli">
+                {{ task.text }} 
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    <a href="{% url 'logout' %}">Logout</a>
+{% else %}
+    <p>Please <a href="{% url 'login' %}">log in</a> to view your profile.</p>
+{% endif %}
+{% endblock %}

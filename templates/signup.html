@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>SIGN-UP </h1>
+    <a href ="/signin">already a member</a>
+    <div class="form">
+        <form action=""method="post">
+            {%csrf_token %}
+            <input type="text" name="username" placeholder="@Enter your unique username" class="field-one" id="username">
+            <input type="text" name="first_name" placeholder="Enter your first name" class="fields" id="firstname">
+            <input type="text" name="last_name" placeholder="Enter your last name" class="fields" id="lastname">
+            <input type="email" name="email" placeholder="Enter your email id " class="fields" id="email">
+            <input type="phone" name="number" placeholder="Enter your phone number" class="fields" id="phone">
+            <input type="password" name="password" placeholder="Enter your pasword" class="field-one" id="pass">
+            <input type="password" name="cnrf-password" placeholder="Confirm your password" class="field-one" id="cnrf-pass">
+            <button type="submit"> SIGN-UP NOW</button>   
+        </form>
+
+    </div>
+</body>
+</html>

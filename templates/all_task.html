@@ -1,0 +1,224 @@
+{%extends 'base.html' %}
+{%block title%} Home {% endblock%}
+
+    {% block toggel%}
+    <div class="toggel">
+        <div class="home">
+            <a href="{% url 'home' %}">Home</a>
+        </div>
+        <div class="profile">
+            <a href="{% url 'profile' %}">Profile</a>
+        </div>
+    </div>
+    {% endblock %}
+
+{% block content%}
+<style>
+    .toggel {
+        width: 500px;
+        height: 60px;
+        flex-shrink: 0;
+        border-radius: 14px;
+        background: linear-gradient(91deg, #06C -0.23%, #BEDBF8 104.85%);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+
+        align-items: center;
+
+    }
+
+    .home{
+        width: 50%;
+height: 40px;
+flex-shrink: 0;
+border-radius: 8px;
+background: linear-gradient(267deg, #FFF4EA -8.35%, #F1F1F1 105.51%);
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+margin: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+    }
+    .home a{
+        width: 100%;
+height: 30px;
+flex-shrink: 0;
+color: #06C;
+text-align: center;
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+text-decoration: none;
+text-align: center;
+
+    }
+    .profile{
+        width: 50%;
+        height: 40px;
+        background: linear-gradient(267deg, #FFF4EA -8.35%, #F1F1F1 105.51%);
+        background: transparent;
+        border-radius: 8px;
+        margin: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .profile a{
+        color: #FFF4EA;
+text-align: center;
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+width: 100%px;
+height: 30px;
+flex-shrink: 0;
+text-decoration: none;
+    }
+
+    .back{
+        width: 17.63px;
+height: 0px;
+margin: 20px;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 10px;
+        position: absolute;
+    
+    
+    }
+    li {
+        width: 461px;
+        height: 45px;
+        flex-shrink: 0;
+        border-radius: 13px;
+        background: #F4F4F4;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+        margin: 15px;
+        transition: opacity 0.5s ease-in-out;
+        margin-left: 20px;
+        margin-right: 20px;
+        display: flex;
+    
+    }
+    .delete{
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+    }
+    .delete svg{
+        width: 25px;
+    height: 25px;
+    }
+    .bullet{
+        width: 25px;
+        height: 25px;
+        flex-shrink: 0;
+        margin: 11px;
+    }
+    .bullet svg{
+        width: 25px;
+        height: 25px;
+    }
+    
+    .taskli{
+        width: 300px;
+    height: 28px;
+    color: #455A64;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: normal;
+    padding: 8px;
+    }
+    
+    .done{
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        margin-top: 11px;
+        margin-right: 8px;
+    }
+    
+    .done svg{
+        width: 25px;
+        height: 25px;
+    }
+</style>
+
+<div class="back">
+    <a href="{%url 'home' %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <g filter="url(#filter0_d_1_568)">
+              <circle cx="18" cy="18" r="17" fill="#001E69"/>
+            </g>
+            <path d="M26.8148 17.7408C27.3671 17.7408 27.8148 17.293 27.8148 16.7408C27.8148 16.1885 27.3671 15.7408 26.8148 15.7408L26.8148 17.7408ZM8.47808 16.0336C8.08756 16.4242 8.08756 17.0573 8.47808 17.4479L14.842 23.8118C15.2326 24.2023 15.8657 24.2023 16.2563 23.8118C16.6468 23.4213 16.6468 22.7881 16.2563 22.3976L10.5994 16.7408L16.2563 11.0839C16.6468 10.6934 16.6468 10.0602 16.2563 9.66968C15.8657 9.27916 15.2326 9.27916 14.842 9.66968L8.47808 16.0336ZM26.8148 15.7408L9.18519 15.7408L9.18519 17.7408L26.8148 17.7408L26.8148 15.7408Z" fill="white"/>
+            <defs>
+              <filter id="filter0_d_1_568" x="0.2" y="0.2" width="39.6" height="39.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dx="2" dy="2"/>
+                <feGaussianBlur stdDeviation="1.4"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0.00833333 0 0 0 0 0.00833333 0 0 0 0 0.00833333 0 0 0 0.22 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_568"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_568" result="shape"/>
+              </filter>
+            </defs>
+          </svg>
+    </a>
+</div>
+
+<ul>
+    {% if incomplete_tasks %}
+    {% for task in incomplete_tasks %}
+
+    <li>
+     <div class="bullet"><svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
+         <circle cx="21" cy="21" r="21" fill="#D9D9D9"/>
+         <circle cx="21" cy="21" r="15" fill="#F0F0F0"/>
+         <circle cx="21" cy="21" r="12" fill="#831111"/>
+       </svg></div>
+     <div class="taskli">
+         {{ task.text }}
+     </div>
+     <form action="{% url 'complete_task' task.id %}" method="post" style="display: inline;">
+
+
+         {% csrf_token %}
+         <button type="submit" class = "done"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+             <circle cx="14" cy="14" r="14" fill="#1F9B3B"/>
+             <path d="M8.16667 14.5L11.6667 18L21 9" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+           </svg></button>
+         <button type="submit" class = "delete">
+             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                 <circle cx="14" cy="14" r="14" fill="#FF2525"/>
+                 <path d="M18.6892 9.31075L9.31074 18.6892" stroke="#F4F4F4" stroke-width="3" stroke-linecap="round"/>
+                 <path d="M18.6892 18.6892L9.31074 9.31075" stroke="#F4F4F4" stroke-width="3" stroke-linecap="round"/>
+               </svg></button>
+     </form>
+
+    </li>
+    {% endfor %}
+    {% else %}
+    <p class="no-tasks-message">No tasks to display.</p>
+    {% endif %}
+
+</ul>
+{% endblock %}
